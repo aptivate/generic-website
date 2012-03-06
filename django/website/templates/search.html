@@ -1,0 +1,70 @@
+{% extends 'col_1_2.html' %}
+{% load i18n %}
+{% load cms_tags sekizai_tags %}
+{% block "main" %}
+
+        {% if searched %}
+    <div class="search_results">
+            <h2>Search results for: <span>{{ query|default:"all" }}</span></h2>
+
+            {% if page.object_list %}
+            <nav>
+                    <div class="sort_by">
+                        <span>sort by:</span>
+                        <select name="sort_by">
+                                <option value="date">Publication date</option>
+                                <option value="type">Publication type</option>
+                        </select>
+                    </div>
+                    <div class="pager">
+                            <span>show {{ page.start_index }}-{{ page.end_index }} of <strong>{{ page.paginator.count }}</strong></span>
+                            <a href="#" class="view_all">view all</a>
+                    </div>
+                    {% if page.has_previous or page.has_next %}<div class="next_prev">
+                        {% if page.has_previous %}<a href="?{{ query_string }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                        |
+                        {% if page.has_next %}<a href="?{{ query_string }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                    </div>{% endif %}
+            </nav>
+
+            <ol>{% for result in page.object_list %}
+                <li>
+                    <article data-type="{{ result.app_label }}">
+                        <div class="meta">
+                            <abbr title="{{ result.verbose_name }}" class="{{ result.object.get_abbr|lower }}_icon">{{ result.object.get_abbr }}</abbr>{% if result.object.funded_3ie %}
+                            <abbr title="3ie funded" class="funded_icon">3ie</abbr>
+                            {% endif %}<br />
+                            <strong>{% if result.object.published_date %}<time datetime="{{ result.object.published_date|date:"Y-01" }}">{{ result.object.published_date|date:"Y" }}</time>{% else %}?{% endif %}</strong><br />
+                            {{ result.object.status.status }}
+                        </div>
+                        <div class="article">
+                                <div>
+                                        <h2><a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a></h2>
+                                        <p class="findings">
+                                            {{ result.object.findings|safe|truncatewords:20 }}
+                                        </p>
+                                        <footer>
+                                                <span class="sector"><strong>sector:</strong> {% for r in result.sector %}{{ r }}{% if not forloop.last %}, {% endif %}{% empty %}No region{% endfor %}</span>{% comment %}TODO:Investigate why join filter fails on this field for SR{% endcomment %}<br />
+                                                <span class="region"><strong>regions:</strong> {% for r in result.region %}{{ r }}{% if not forloop.last %}, {% endif %}{% empty %}No region{% endfor %}</span>{% comment %}TODO:Investigate why join filter fails on this field for SR{% endcomment %}
+                                        </footer>
+                                </div>
+                        </div>
+                    </article>
+                </li>
+            {% endfor %}</ol>
+            {% else %}<p>No results found.</p>{% endif %}
+
+            {% if page.has_previous or page.has_next %}
+                <div class="next_prev">
+                    {% if page.has_previous %}<a href="?{{ query_string }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?{{ query_string }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+    </div>
+        {% else %}
+{% block "before_search" %}
+            {% placeholder "main" %}    
+{% endblock %}
+        {% endif %}
+{% endblock %}

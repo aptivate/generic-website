@@ -1,0 +1,10 @@
+*.pyc
+.*.swp
+*~
+django/*/local_settings.py
+django/*/private_settings.py
+django/*/.ve
+django/*/distribute-*.tar.gz
+django/*/*.sqlite
+reports/*
+.DS_Store

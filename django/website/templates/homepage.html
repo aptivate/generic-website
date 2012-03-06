@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load cms_tags sekizai_tags %}
+{% load menu_tags %}
+{% block "content" %}
+		<div class="content_wrap">
+			<div class="content home">
+				<article role="main" class="article_page">
+					<div class="page">
+						<header class="header_page">
+							<h1>{% page_attribute "page_title" %}</h1>
+						</header>
+					<!-- Main content start -->
+						{% block "main" %}{% placeholder "main" %}{% endblock %}
+						<!-- Main content end -->
+					</div>	
+				</article>
+				<aside class="aside_site">
+					<!-- Sidebar start -->
+					{% block "sidebar" %}{% placeholder "sidebar" %}{% endblock %}
+					<!-- Sidebar end -->
+				</aside>
+			</div>
+		</div>
+{% endblock %}
+

@@ -1,0 +1,19 @@
+Django==1.3.1
+mysql-python==1.2.3
+pysolr==2.1.0-beta
+django-mptt==0.5.1
+django-cms==2.2
+django-cms-search==0.4.1
+django-reversion==1.4
+PIL
+south
+django-classy-tags
+django-cms-redirects
+django-polymorphic==0.2
+easy-thumbnails==1.0-alpha-21
+-e git://github.com/samastur/django-filer.git@19c416905cf1dfe492aed6ae8f1963cccb5517e5#egg=django_filer-dev
+cmsplugin-filer==0.8.0
+
+# search engine for haystack:
+Whoosh==2.3.2
+

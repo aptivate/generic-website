@@ -1,0 +1,76 @@
+{% extends 'col_1_2.html' %}
+{% load i18n %}
+{% load cms_tags sekizai_tags %}
+{% block "sidebar" %}
+	<section class="search">
+		<form><input class="button" type="button" VALUE="Back to results" onClick="history.go(-1);return true;"></form> 
+	</section>
+{% endblock %}
+{% block "main" %}
+<table>
+    <tbody>
+        <tr>
+            <td>Title</td>
+            <td><h2 style="border:none;">{{ object.title }}</h2></td>
+        </tr>
+        <tr>
+            <td>Authors</td>
+            <td>{{ object.author }}</td>
+        </tr>
+        <tr>
+            <td>Sector and subsector</td>
+            <td>{% for sector in object.sector.all %}{{ sector.name }}
+                {% if not forloop.last %},{% endif %}{% empty %} None specified{% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Regions</td>
+            <td>{% for region in object.region.all %}{{ region.name }}
+                {% if not forloop.last %},{% endif %}{% empty %} None specified{% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Equity Focus</td>
+            <td>{% for ef in object.equity_focus.all %}{{ ef.name }}
+                {% if not forloop.last %},{% endif %}{% empty %} None specified{% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>{{ object.status.status }}</td>
+        </tr>
+        <tr>
+            <td>Review Type</td>
+            <td>{{ object.review_type.type }}</td>
+        </tr>
+        <tr>
+            <td>Background</td>
+            <td>{{ object.background|safe|linebreaks }}</td>
+        </tr>
+        <tr>
+            <td>Objectives</td>
+            <td>{{ object.objectives|safe|linebreaks }}</td>
+        </tr>
+        <tr>
+            <td>Main findings</td>
+            <td>{{ object.findings|safe|linebreaks }}</td>
+        </tr>
+        <tr>
+            <td>Methodology</td>
+            <td>{{ object.methodology|safe|linebreaks }}</td>
+        </tr>
+        <tr>
+            <td>Quality Assessment</td>
+            <td>{{ object.quality_assessment|safe|linebreaks }}</td>
+        </tr>
+        <tr>
+            <td>Publication Source</td>
+            <td>{{ object.publication_source|safe|linebreaks }}</td>
+        </tr>
+        <tr>
+            <td>Downloadable link</td>
+            <td><a href="{{ object.downloadable_link }}">{{ object.downloadable_link }}</a></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

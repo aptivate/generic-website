@@ -1,0 +1,46 @@
+{% load i18n %}
+{% load cms_tags sekizai_tags %}
+{% load menu_tags %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{{ request.current_page.get_title }}</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+		{% render_block "css" %}
+		{% render_block "js" %}
+	</head>
+	<body class="{{ request.current_page.get_root.get_slug }}">
+		{% cms_toolbar %}
+		<header class="header_site">
+			<nav class="nav_site">
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/item1">Item One</a></li>
+					<li><a href="/item2">Item Two</a>
+					<!-- <li><a href="/events">Events</a></li> -->
+					<li class="end"><a href="/contact">Contact us</a></li>
+				</ul>
+			</nav>
+			<hgroup>
+				<h1><a href="/"><img src="{{ STATIC_URL }}images/logo.png" alt="Your Logo Here" width="200" height="80"></a></h1>
+				<h2>Another fine website by Aptivate</h2>
+			</hgroup>
+			<nav class="nav_sec">
+				<ul>
+					<li class="item1"><a href="/item1">open<span>Item One</span></a></li>
+					<li class="item2"><a href="/item2">open<span>Item Two</span></a></li>
+					<li class="about end"><a href="/about">learn<span>About This Org</span></a></li>
+				</ul>
+			</nav>
+		</header>
+		{% block "content" %}
+		{% placeholder "main" %}
+		{% endblock %}
+		<footer>
+			<div class="site_info">Copyright &copy; 2012 Aptivate. All rights reserved.</div>
+		</footer>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/functions.js"></script>
+	</body>
+</html>

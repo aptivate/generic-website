@@ -1,0 +1,64 @@
+{% extends 'search.html' %}
+{% load cms_tags sekizai_tags %}
+{% load menu_tags %}
+
+{% block "sidebar" %}
+	<nav class="nav_sidebar">
+		{% with root=request.current_page.get_root %}
+		<h2><a href="{% page_url root %}">{% page_attribute "page_title" root %}</a></h2>
+		<ul>
+			{% show_menu_below_id root.reverse_id 0 100 100 100 %}
+		</ul>{% endwith %}
+	</nav>
+
+    <section class="search">
+    	<h2>Search <span>systematic reviews</span></h2>
+	    <form method="get" action="." class="search_advanced">
+	        <fieldset>
+	                {{ form.q }}
+	                <input type="submit" value="Search" class="search_btn" />
+	        </fieldset>
+	        <fieldset>
+	                <h3>Refine search</h3>
+	                <ol>
+	                        <li>
+	                                <label for="id_title">{{ form.title.label }}</label>
+	                                {{ form.title }}
+	                        </li>
+	                        <li>
+	                                <label for="id_author">{{ form.author.label }}</label>
+	                                {{ form.author }}
+	                        </li>
+	                        <li>
+	                                <label for="id_sector">{{ form.sector.label }}</label>
+	                                {{ form.sector }}
+	                        </li>
+	                        <li>
+	                                <label for="id_subsector">{{ form.subsector.label }}</label>
+	                                {{ form.subsector }}
+	                        </li>
+	                        <li>
+	                                <label for="id_region">{{ form.region.label }}</label>
+	                                {{ form.region }}
+	                        </li>
+	                        <li>
+	                                <label for="id_equity_focus">{{ form.equity_focus.label }}</label>
+	                                {{ form.equity_focus }}
+	                        </li>
+	                        <li>
+	                                <label for="id_status">{{ form.status.label }}</label>
+	                                {{ form.status }}
+	                        </li>
+	                        <li>
+	                                <label for="id_type">{{ form.type.label }}</label>
+	                                {{ form.type }}
+	                        </li>
+	                        <li class="toright">
+	                                <a href="{% url sr_search %}">Clear search</a>
+	                                <input type="submit" value="Search" class="search_btn bottom">
+	                        </li>
+	                </ol>
+	        </fieldset>
+	    </form>
+    </section>
+{% endblock %}

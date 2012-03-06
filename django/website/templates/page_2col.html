@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load cms_tags sekizai_tags %}
+{% load menu_tags %}
+{% block "content" %}
+		<div class="content_wrap">
+			<div class="content page">
+				<article role="main" class="article_page">
+					<div class="page">
+						<header class="header_page">
+							<h1>{% page_attribute "page_title" %}</h1>
+						</header>
+					<!-- Main content start -->
+						{% block "main" %}
+						{% placeholder "main" %}{% endblock %}
+						<!-- Main content end -->
+					</div>	
+				</article>
+				<aside class="aside_site">
+					<!-- Sidebar start -->
+					{% block "sidebar" %}
+					<nav class="nav_sidebar">
+						<ul>
+							{% show_menu_below_id "about" 0 100 100 100 %}
+						</ul>
+					</nav>
+					{% placeholder "sidebar" %}
+					{% endblock %}
+					<!-- Sidebar end -->
+				</aside>
+			</div>
+		</div>
+{% endblock %}
+
