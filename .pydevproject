@@ -9,6 +9,6 @@
 <value>aptivate-website/manage.py</value>
 </pydev_variables_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
-<path>/aptivate-website/django/website</path>
+<path>/generic-website/django/website</path>
 </pydev_pathproperty>
 </pydev_project>
