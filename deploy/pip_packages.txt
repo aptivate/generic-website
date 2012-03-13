@@ -13,6 +13,7 @@ django-polymorphic==0.2
 easy-thumbnails==1.0-alpha-21
 -e git://github.com/samastur/django-filer.git@19c416905cf1dfe492aed6ae8f1963cccb5517e5#egg=django_filer-dev
 cmsplugin-filer==0.8.0
+cmsplugin-blog==1.1.1
 
 # search engine for haystack:
 Whoosh==2.3.2

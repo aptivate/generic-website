@@ -157,6 +157,11 @@ INSTALLED_APPS = (
     'cms_redirects',
     'lib',
     'example_cms_app',
+    'blog',
+    'cmsplugin_blog',
+    'djangocms_utils',
+    'simple_translation',
+    'tagging',
 )
 
 CMS_TEMPLATES = (
@@ -193,6 +198,10 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
+
+JQUERY_JS = STATIC_URL + 'jquery-ui-1.8.18/js/jquery-1.7.1.min.js'
+JQUERY_UI_JS = STATIC_URL + 'jquery-ui-1.8.18/js/jquery-ui-1.8.18.custom.min.js' 
+JQUERY_UI_CSS = STATIC_URL + 'jquery-ui-1.8.18/css/smoothness/jquery-ui-1.8.18.custom.css'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
