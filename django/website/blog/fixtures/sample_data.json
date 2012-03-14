@@ -1,0 +1,74 @@
+[
+    {
+        "pk": 3,
+        "model": "cmsplugin_blog.entry",
+        "fields": {
+            "placeholders": [
+                9,
+                10
+            ],
+            "tags": "",
+            "pub_date": "2012-03-13 16:48:29",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 2,
+        "model": "cmsplugin_blog.entry",
+        "fields": {
+            "placeholders": [
+                11,
+                12
+            ],
+            "tags": "",
+            "pub_date": "2012-03-13 16:48:17",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 1,
+        "model": "cmsplugin_blog.entry",
+        "fields": {
+            "placeholders": [
+                7,
+                8
+            ],
+            "tags": "",
+            "pub_date": "2012-03-13 16:48:01",
+            "is_published": true
+        }
+    },
+    {
+        "pk": 1,
+        "model": "cmsplugin_blog.entrytitle",
+        "fields": {
+            "entry": 1,
+            "author": 1,
+            "slug": "bloggy",
+            "language": "en",
+            "title": "Bloggy"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "cmsplugin_blog.entrytitle",
+        "fields": {
+            "entry": 2,
+            "author": 1,
+            "slug": "blog-blog",
+            "language": "en",
+            "title": "Blog Blog"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "cmsplugin_blog.entrytitle",
+        "fields": {
+            "entry": 3,
+            "author": 1,
+            "slug": "blog-blog-blaaarg",
+            "language": "en",
+            "title": "Blog blog blaaarg!"
+        }
+    }
+]
