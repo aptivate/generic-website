@@ -212,7 +212,7 @@ CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'threeiesite_cache',
+        'LOCATION': 'genericsite_cache',
     }
 }
 
