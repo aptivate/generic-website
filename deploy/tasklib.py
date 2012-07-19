@@ -429,6 +429,12 @@ def update_db(syncdb=True, drop_test_db=True, force_use_migrations=False, databa
     #print 'syncdb: %s' % type(syncdb)
     use_migrations = force_use_migrations
     if env['project_type'] == "django" and syncdb:
+        # if we are using the database cache we need to create the table
+        # and we need to do it before syncdb
+        cache_table = _get_cache_table()
+        if cache_table and not db_table_exists(cache_table,
+                db_user, db_pw, db_name, db_port, db_host):
+            _manage_py(['createcachetable', cache_table])
         # if we are using South we need to do the migrations aswell
         for app in project_settings.django_apps:
             if os.path.exists(os.path.join(env['django_dir'], app, 'migrations')):
@@ -436,11 +442,6 @@ def update_db(syncdb=True, drop_test_db=True, force_use_migrations=False, databa
         _manage_py(['syncdb', '--noinput'])
         if use_migrations:
             _manage_py(['migrate', '--noinput'])
-        # if we are using the database cache we need to create the table
-        cache_table = _get_cache_table()
-        if cache_table and not db_table_exists(cache_table,
-                db_user, db_pw, db_name, db_port, db_host):
-            _manage_py(['createcachetable', cache_table])
 
 def db_exists(db_user, db_pw, db_name, db_port, db_host):
     db_exist_call = ['mysql', '-u', db_user, '-p'+db_pw]
