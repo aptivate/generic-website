@@ -99,13 +99,15 @@ def deploy(revision=None, keep=None):
     * keep is the number of old versions to keep around for rollback (default
       5)"""
     require('project_root', provided_by=env.valid_envs)
-    with settings(warn_only=True):
-        apache_cmd('stop')
-
+    fablib.check_for_local_changes()
     fablib._create_dir_if_not_exists(env.project_root)
 
     if files.exists(env.vcs_root):
         create_copy_for_rollback(keep)
+
+    # don't need to stop apache until rollback copy created
+    with settings(warn_only=True):
+        apache_cmd('stop')
 
     checkout_or_update(revision)
     if env.use_virtualenv:
@@ -115,7 +117,7 @@ def deploy(revision=None, keep=None):
     create_private_settings()
     link_local_settings()
 
-    update_db(use_migrations=True)
+    update_db(force_use_migrations=True)
 
     rm_pyc_files()
     if env.environment == 'production':

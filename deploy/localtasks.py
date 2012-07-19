@@ -10,4 +10,4 @@ def deploy(environment=None):
     tasklib.link_local_settings(environment)
     tasklib.update_git_submodules()
     tasklib.create_ve()
-    tasklib.update_db(use_migrations=True)
+    tasklib.update_db(force_use_migrations=True)
