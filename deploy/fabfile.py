@@ -55,9 +55,9 @@ def _local_setup():
 
 def dev_server():
     """ use dev environment on remote host to play with code in production-like env"""
-    utils.abort('remove this line when server is setup')
+    utils.abort('remove this line when dev server setup')
     env.environment = 'dev_server'
-    env.hosts = ['fen-vz-%s-dev.fen.aptivate.org' % project_settings.project_name]
+    env.hosts = ['fen-vz-' + project_settings.project_name + '-dev']
     _local_setup()
 
 
@@ -65,63 +65,24 @@ def staging_test():
     """ use staging environment on remote host to run tests"""
     # this is on the same server as the customer facing stage site
     # so we need project_root to be different ...
-    utils.abort('remove this line when server is setup')
     env.project_dir = env.project + '_test'
     env.environment = 'staging_test'
     env.use_apache = False
-    env.hosts = ['fen-vz-%s.fen.aptivate.org' % project_settings.project_name]
+    env.hosts = ['fen-vz-' + project_settings.project_name]
     _local_setup()
 
 
 def staging():
     """ use staging environment on remote host to demo to client"""
-    utils.abort('remove this line when server is setup')
     env.environment = 'staging'
-    env.hosts = ['fen-vz-%s.fen.aptivate.org' % project_settings.project_name]
+    env.hosts = ['fen-vz-' + project_settings.project_name]
     _local_setup()
 
 
 def production():
     """ use production environment on remote host"""
-    utils.abort('remove this line when server is setup')
     env.environment = 'production'
-    env.hosts = ['lin-%s.aptivate.org:48001' % project_settings.project_name]
+    env.hosts = ['lin-' + project_settings.project_name + '.aptivate.org:48001']
     _local_setup()
-
-
-def deploy(revision=None, keep=None):
-    """ update remote host environment (virtualenv, deploy, update)
-
-    It takes two arguments:
-
-    * revision is the VCS revision ID to checkout (if not specified then
-      the latest will be checked out)
-    * keep is the number of old versions to keep around for rollback (default
-      5)"""
-    require('project_root', provided_by=env.valid_envs)
-    with settings(warn_only=True):
-        apache_cmd('stop')
-
-    fablib._create_dir_if_not_exists(env.project_root)
-
-    if files.exists(env.vcs_root):
-        create_copy_for_rollback(keep)
-
-    checkout_or_update(revision)
-    if env.use_virtualenv:
-        update_requirements()
-
-    # if we're going to call tasks.py then this has to be done first:
-    create_private_settings()
-    link_local_settings()
-
-    update_db(use_migrations=True)
-
-    rm_pyc_files()
-    if env.environment == 'production':
-        setup_db_dumps()
-
-    link_apache_conf()
-    apache_cmd('start')
 
 
